@@ -1,0 +1,37 @@
+---
+
+- name: Set element published ports variable
+  set_fact:
+    element_published_ports: ["127.0.0.1:{{ ports.element_http }}:80"]
+  when: reverse_proxy_type != 'traefik'
+
+- name: Include traefik vars
+  include_vars: traefik.yml
+  when: reverse_proxy_type == 'traefik'
+
+- name: Element web
+  docker_container:
+    name: 'element'
+    image: 'vectorim/element-web:latest'
+    pull: true
+    container_default_behavior: no_defaults
+    volumes:
+      - /app
+    published_ports: "{{ element_published_ports | default(omit) }}"
+    labels: "{{ element_traefik_labels | default(omit) }}"
+    restart_policy: always
+  register: element_out
+
+- name: Get element config volume path from container creation output
+  set_fact:
+    element_config_volume: "{{ element_out.container.Mounts | selectattr('Destination', 'equalto', '/app') | join }}"
+
+- name: Read element config to variable
+  include_vars: element_config.yml
+  when: hostvars[inventory_hostname]['element_config'] is not defined
+
+- name: Put element config in place
+  copy:
+    content: "{{ element_config }}"
+    dest: "{{ element_config_volume.Source }}/config.json"
+    mode: '644'

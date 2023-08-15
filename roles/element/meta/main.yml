@@ -1,0 +1,9 @@
+---
+
+dependencies:
+  - role: docker
+  - role: uumas.general.reverse_proxy
+    vhost_id: element
+    vhost_domains: "{{ element_domains }}"
+    proxy_target: http://127.0.0.1:{{ ports.element_http }}
+    when: reverse_proxy_type != 'none' and reverse_proxy_type != 'traefik'

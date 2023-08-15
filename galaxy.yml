@@ -1,0 +1,12 @@
+namespace: pikaviestin
+name: docker
+description: Roles for installing services in docker containers
+version: 0.0.1
+readme: README.md
+repository: https://github.com/pikaviestin/ansible-docker
+license_file: LICENSE
+dependencies:
+  uumas.general: '>=0.5.9'
+authors:
+  - uumas
+  - samip5
