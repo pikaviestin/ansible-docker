@@ -5,7 +5,8 @@ on:
   workflow_dispatch:
   push:
     branches: ["master"]
-    paths: [".github/workflows/publish-collection.yaml"]
+    paths:
+      - 'galaxy.yml'
 
 jobs:
   publish-collection:
