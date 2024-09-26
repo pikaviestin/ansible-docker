@@ -2,7 +2,8 @@
 
 dependencies:
   - role: docker
-  - role: uumas.general.reverse_proxy
+  - role: uumas.general.vhost
+    vhost_type: reverse_proxy
     vhost_id: element
     vhost_domains: "{{ element_domains }}"
     proxy_target: http://127.0.0.1:{{ ports.element_http }}
