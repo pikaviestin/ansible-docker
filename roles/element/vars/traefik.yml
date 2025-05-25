@@ -4,3 +4,4 @@ element_traefik_labels:
   traefik.enable: 'true'
   traefik.http.routers.element.rule: "Host(`{{ element_domains | join('`) || Host(`') }}`)"
   traefik.http.routers.element.tls.certresolver: 'le'
+  traefik.http.services.element.loadbalancer.server.port: '{{ element_port | default(80) }}'
