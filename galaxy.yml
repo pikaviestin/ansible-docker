@@ -1,7 +1,7 @@
 namespace: pikaviestin
 name: docker
 description: Roles for installing services in docker containers
-version: 0.0.2
+version: 0.0.3
 readme: README.md
 repository: https://github.com/pikaviestin/ansible-docker
 license_file: LICENSE
