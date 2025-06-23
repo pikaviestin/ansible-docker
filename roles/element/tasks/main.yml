@@ -1,5 +1,4 @@
 ---
-
 - name: Set element published ports variable
   set_fact:
     element_published_ports: ["127.0.0.1:{{ ports.element_http }}:80"]
@@ -35,3 +34,4 @@
     content: "{{ element_config }}"
     dest: "{{ element_config_volume.Source }}/config.json"
     mode: '644'
+  notify: Restart element container
