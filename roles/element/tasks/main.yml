@@ -23,7 +23,7 @@
 
 - name: Get element config volume path from container creation output
   set_fact:
-    element_config_volume: "{{ element_out.container.Mounts | selectattr('Destination', 'equalto', '/app') | join }}"
+    element_config_volume: "{{ element_out.container.Mounts | selectattr('Destination', 'equalto', '/app') | first }}"
 
 - name: Read element config to variable
   include_vars: element_config.yml
